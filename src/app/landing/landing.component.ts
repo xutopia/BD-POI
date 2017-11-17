@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -11,9 +12,13 @@ export class LandingComponent implements OnInit {
   lng: number = -74.20911;
   zoom: number = 12;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  redirect(): void {
+    this.router.navigate(['/search'])
   }
 
 }

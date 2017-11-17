@@ -1,5 +1,10 @@
-<div>
+<div class="map-container">
   <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
+  </agm-map>
+</div>
+
+<div class="btn-group begin" ngbRadioGroup name="radioBasic" (click)="redirect()">
+  <label ngbButtonLabel class="btn-primary">
+    BEGIN
+  </label>
 </div>
