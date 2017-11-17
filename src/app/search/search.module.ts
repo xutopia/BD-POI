@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SearchComponent } from './search.component';
 
+
 const searchRouting: ModuleWithProviders = RouterModule.forChild([
   {
     path: 'search',
@@ -15,6 +16,8 @@ const searchRouting: ModuleWithProviders = RouterModule.forChild([
     CommonModule,
     searchRouting
   ],
-  declarations: [SearchComponent]
+  declarations: [
+    SearchComponent,
+  ]
 })
 export class SearchModule { }

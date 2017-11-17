@@ -5,4 +5,5 @@
 
 export const environment = {
   production: false,
+  PLACES_API_KEY: "KEY"
 };
