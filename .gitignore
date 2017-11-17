@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+#env
+/src/environments
+
 # compiled output
 /dist
 /tmp
@@ -33,6 +36,7 @@ npm-debug.log
 testem.log
 /typings
 
+
 # e2e
 /e2e/*.js
 /e2e/*.map
@@ -41,4 +45,3 @@ testem.log
 .DS_Store
 Thumbs.db
 .env
-/src/environments/
