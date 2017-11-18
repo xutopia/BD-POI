@@ -6,12 +6,16 @@ import { AgmCoreModule } from '@agm/core';
 import { SearchModule } from './search/search.module';
 import { ResultsModule } from './results/results.module';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { environment } from '../environments/environment';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
+
+import { ApiService } from './shared/services/api.service';
+import { QueryBuilderService } from './shared/services/query-builder.service';
 
 
 
@@ -26,13 +30,17 @@ import { FooterComponent } from './shared/footer/footer.component';
     BrowserModule,
     NgbModule.forRoot(),
     AppRoutingModule,
+    HttpClientModule,
     SearchModule,
     ResultsModule,
     AgmCoreModule.forRoot({
       apiKey: environment.PLACES_API_KEY
     }),
   ],
-  providers: [],
+  providers: [
+    ApiService,
+    QueryBuilderService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
