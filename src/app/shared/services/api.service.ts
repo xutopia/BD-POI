@@ -28,7 +28,7 @@ export class ApiService {
     return Observable.throw(error);
   }
 
-  getPlaces(query: Query, searchType: string): Observable<any> {
+  getPlaces(query: Query, searchType: string = 'textsearch'): Observable<any> {
     const baseUrl = `${environment.url}/${searchType}/json`;
     const url = baseUrl + this.queryBuilder.createUrl(query);
     const headers = this.setHeaders();
