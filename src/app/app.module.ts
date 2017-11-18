@@ -19,6 +19,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 
 import { ApiService } from './shared/services/api.service';
 import { QueryBuilderService } from './shared/services/query-builder.service';
+import { StoreService } from './shared/services/store.service';
 // import { initialState } from './shared/models/initial-state.model';
 // import { appReducer } from './shared/reducers/app.reducer';
 // import { PoiEffects } from './shared/effects/index.effects';
@@ -55,6 +56,7 @@ import { QueryBuilderService } from './shared/services/query-builder.service';
   providers: [
     ApiService,
     QueryBuilderService,
+    StoreService,
     // PoiEffects,
     // SearchAction
   ],
