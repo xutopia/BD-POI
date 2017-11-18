@@ -10,12 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 // import { StoreModule, ActionReducer, combineReducers } from '@ngrx/store';
 // import { EffectsModule } from '@ngrx/effects';
 // import { StoreRouterConnectingModule } from 'ngrx/router-store';
-
+import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { environment } from '../environments/environment';
-import { HeaderComponent } from './shared/header/header.component';
-import { FooterComponent } from './shared/footer/footer.component';
 
 import { ApiService } from './shared/services/api.service';
 import { QueryBuilderService } from './shared/services/query-builder.service';
@@ -31,8 +29,6 @@ import { StoreService } from './shared/services/store.service';
   declarations: [
     AppComponent,
     LandingComponent,
-    HeaderComponent,
-    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +37,7 @@ import { StoreService } from './shared/services/store.service';
     HttpClientModule,
     SearchModule,
     ResultsModule,
+    SharedModule,
     AgmCoreModule.forRoot({
       apiKey: environment.PLACES_API_KEY
     }),

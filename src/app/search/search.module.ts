@@ -1,6 +1,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
+import { SharedModule } from '../shared/shared.module';
 import { SearchComponent } from './search.component';
 
 
@@ -14,7 +16,8 @@ const searchRouting: ModuleWithProviders = RouterModule.forChild([
 @NgModule({
   imports: [
     CommonModule,
-    searchRouting
+    SharedModule,
+    searchRouting,
   ],
   declarations: [
     SearchComponent,
