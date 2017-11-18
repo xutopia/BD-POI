@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit {
   }
 
   getPlaces(): void {
-    this.apiService.getPlaces({queryText: 'food near me'}, 'textsearch')
+    this.apiService.getPlaces({queryText: '369+lexington'}, 'textsearch')
       .subscribe(data => {
         console.log('inside the getPlaces method, looking at data: ', data);
       })

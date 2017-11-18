@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  PLACES_API_KEY: "KEY",
+  PLACES_API_KEY: "Key",
   url: 'https://maps.googleapis.com/maps/api/place',
 };

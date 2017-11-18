@@ -25,15 +25,16 @@ export class ApiService {
   }
 
   private handleErrors(error: any) {
-    return Observable.throw(error.json());
+    return Observable.throw(error);
   }
 
   getPlaces(query: Query, searchType: string): Observable<any> {
-    const params = this.queryBuilder.createParams(query);
+    const baseUrl = `${environment.url}/${searchType}/json`;
+    const url = baseUrl + this.queryBuilder.createUrl(query);
     const headers = this.setHeaders();
 
-    return this.http.get(`${environment.url}/${searchType}/json`, { headers, params })
+    return this.http.get(`${url}&key=${environment.PLACES_API_KEY}`)
             .catch(this.handleErrors)
-            .map((res: Response) => res.json());
+            .map((res: Response) => res);
   }
 }
