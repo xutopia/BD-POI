@@ -3,15 +3,17 @@
 }
 
 .results-list-container {
-  flex-grow: 3;
+  flex-shrink: 4;
+  display: flex;
+  align-items: baseline;
 }
 
 .results-map-container {
-  flex-grow: 6;
+  flex-grow: 10;
 }
 
 .results-details-container {
-  flex-grow: 3;
+  flex-grow: 4;
 }
 
 agm-map {

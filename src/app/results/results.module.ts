@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { environment } from '../../environments/environment';
 import { SharedModule } from '../shared/shared.module';
@@ -23,7 +24,8 @@ const ResultsRouting: ModuleWithProviders = RouterModule.forChild([
     SharedModule,
     AgmCoreModule.forRoot({
       apiKey: environment.PLACES_API_KEY
-    })
+    }),
+    NgbModule,
   ],
   declarations: [
     ResultsComponent,

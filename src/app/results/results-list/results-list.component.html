@@ -1,3 +1,21 @@
-<p>
-  results-list works!
-</p>
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ngb-panel
+    *ngFor="let result of results"
+    title="{{result.name}}"
+  >
+    <ng-template ngbPanelContent>
+      <ngb-rating rate="{{result.rating}}" [readonly]="true" max="5"></ngb-rating>
+      <br />
+      <span>
+        {{result.types[0]}}
+      </span>
+      &middot;
+      <span>
+        {{result.formatted_address}}
+      </span>
+      <p>
+        Price level: {{result.price_level}}
+      </p>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
