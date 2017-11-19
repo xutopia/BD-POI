@@ -1,7 +1,10 @@
 <app-header></app-header>
 
-<p>
-  results works!
-</p>
+<div class="results-map-container">
+  <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+</div>
+<app-results-details></app-results-details>
 
 <app-footer></app-footer>

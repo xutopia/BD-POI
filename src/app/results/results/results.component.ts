@@ -8,13 +8,15 @@ import { StoreService } from '../../shared/services/store.service';
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent implements OnInit {
+  lat: number = 41.0157;
+  lng: number = -74.20911;
 
   constructor(
     private storeService: StoreService,
   ) { }
 
   ngOnInit() {
-    console.log('no store :\(: ', this.storeService);
+    
   }
 
 }
