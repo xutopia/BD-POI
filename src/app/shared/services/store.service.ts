@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Query } from '../models/query.model';
+import { Marker } from '../models/marker.model';
 
 @Injectable()
 export class StoreService {
@@ -9,6 +10,7 @@ export class StoreService {
   private details: any = {};
   private errors: any = {};
   private photos: Array<string> = [];
+  private markers: Marker[] =[];
 
   addToSearchHistory(query: Query | string): void {
     this.searchHistory.push(query);
@@ -46,4 +48,6 @@ export class StoreService {
     }
   }
 
+  addMarkers(): void {
+  }
 }
