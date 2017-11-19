@@ -16,6 +16,7 @@ export class SearchComponent implements OnInit {
   queryText: string = '';
   categorySelected: string = 'select';
   categories = CATEGORIES;
+  maxPrice: number = 4;
 
   constructor(
     private apiService: ApiService,
