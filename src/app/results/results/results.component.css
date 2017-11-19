@@ -12,10 +12,6 @@
   flex-grow: 10;
 }
 
-.results-details-container {
-  flex-grow: 4;
-}
-
 agm-map {
   height: 100vh;
 }

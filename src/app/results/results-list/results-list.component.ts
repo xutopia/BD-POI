@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StoreService } from '../../shared/services/store.service';
 import { ApiService } from '../../shared/services/api.service';
 import { UtilService } from '../../shared/services/util.service';
@@ -10,11 +11,19 @@ import { UtilService } from '../../shared/services/util.service';
 })
 export class ResultsListComponent implements OnInit {
   results: any;
+  name: string = 'Establishment Name';
+  formatted_address: string = 'Address Unavailable';
+  formatted_phone_number: string = 'Phone Number Unavailable';
+  business_hours: Array<string> = ['No Business Hours to Show'];
+  website: string = 'No Website Address Listed';
+  @ViewChild('detailsContent') private detailsContent;
+  @ViewChild('noDetails') private noDetails;
 
   constructor(
     private storeService: StoreService,
     private apiService: ApiService,
     private utilService: UtilService,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
@@ -27,16 +36,18 @@ export class ResultsListComponent implements OnInit {
     this.apiService.getDetails(id)
       .subscribe(details => {
         console.log('inside the fetchDetails, looking at details: ', details);
-        this.storeService.storeDetails(details);
-
-        if (details.result.photos.length) {
-          let photoIds = this.utilService.extractPhotoIds(details.result.photos);
-          this.apiService.getPhotos(photoIds, 400)
-          .subscribe(photos => {
-            console.log('looking at photos: ', photos);
-          })
+        if (details.status === 'OK') {
+          this.storeService.storeDetails(details.result);
+          this.name = details.result.name;
+          this.formatted_address = details.result.formatted_address;
+          this.formatted_phone_number = details.result.formatted_phone_number;
+          this.business_hours = details.result.opening_hours.weekday_text;
+          this.website = details.result.website;
+          this.modalService.open(this.detailsContent);
+        } else {
+          this.modalService.open(this.noDetails);
         }
-      })
+      });
   }
 
 }

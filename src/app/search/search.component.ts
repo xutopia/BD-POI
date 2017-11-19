@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { Store } from "@ngrx/store";
 // import { State } from '../shared/models/state.model';
 // import { SearchAction } from '../shared/actions/index.actions';
