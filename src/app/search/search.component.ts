@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 // import { Store } from "@ngrx/store";
 // import { State } from '../shared/models/state.model';
@@ -27,6 +28,7 @@ export class SearchComponent implements OnInit {
     private apiService: ApiService,
     private storeService: StoreService,
     private modalService: NgbModal,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -42,6 +44,7 @@ export class SearchComponent implements OnInit {
           this.storeService.clearResults();
           this.storeService.addToResults(data.results);
           this.storeService.storeNextToken(data.next_page_token);
+          this.router.navigateByUrl('/results');
         } else {
           this.openModal(this.content);
         }
