@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { StoreService } from '../../shared/services/store.service';
+
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private storeService: StoreService,
+  ) { }
 
   ngOnInit() {
+    console.log('no store :\(: ', this.storeService);
   }
 
 }

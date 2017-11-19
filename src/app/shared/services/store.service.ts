@@ -3,12 +3,12 @@ import { Query } from '../models/query.model';
 
 @Injectable()
 export class StoreService {
-  searchHistory: Array<any> = [];
-  results: Array<any> = [];
-  nextToken: string = '';
-  details: any = {};
-  errors: any = {};
-  photos: Array<string> = [];
+  private searchHistory: Array<any> = [];
+  private results: Array<any> = [];
+  private nextToken: string = '';
+  private details: any = {};
+  private errors: any = {};
+  private photos: Array<string> = [];
 
   addToSearchHistory(query: Query | string): void {
     this.searchHistory.push(query);
@@ -19,11 +19,19 @@ export class StoreService {
   }
 
   addToResults(data: any): void {
-    this.results.push(data);
+    this.results.push(...data);
+  }
+
+  clearResults(): void {
+    this.results = [];
   }
 
   fetchResults() {
     return this.results;
+  }
+
+  storeNextToken(token: string): void {
+    this.nextToken = token;
   }
 
   storeDetails(data: any): void {

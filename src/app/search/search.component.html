@@ -10,12 +10,6 @@
       placeholder="Search"
       [(ngModel)]="queryText"
     />
-    <input
-      type="submit"
-      class="btn"
-      value="Search"
-      (click)="getPlaces()"
-    />
   </form>
 </div>
 
@@ -44,6 +38,33 @@
   {{maxPrice}}
 </div>
 
+<div class="buttons-container">
+  <button
+    class="btn btn-primary"
+    (click)="getPlaces()"
+  >SEARCH</button>
+  <button
+    class="btn btn-danger"
+    (click)="resetSearch()"
+  >RESET SEARCH</button>
+
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Bad Request</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>It appears your search resulted in an error. Please try your search again, or refine the search term and options.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
 
 
 <app-footer></app-footer>
