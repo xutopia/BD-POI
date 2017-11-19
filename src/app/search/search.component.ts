@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit {
         } else {
           this.openModal(this.content);
         }
-      })
+      });
   }
 
   constructQuery(queryText: string, type: string, maxprice: number): Query {

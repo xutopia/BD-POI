@@ -48,6 +48,10 @@ export class StoreService {
     }
   }
 
+  clearDetails(): void {
+    this.details = {};
+  }
+
   addMarkers(): void {
   }
 }

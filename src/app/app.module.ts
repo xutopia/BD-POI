@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 import { ApiService } from './shared/services/api.service';
 import { QueryBuilderService } from './shared/services/query-builder.service';
 import { StoreService } from './shared/services/store.service';
+import { UtilService } from './shared/services/util.service';
 // import { initialState } from './shared/models/initial-state.model';
 // import { appReducer } from './shared/reducers/app.reducer';
 // import { PoiEffects } from './shared/effects/index.effects';
@@ -54,6 +55,7 @@ import { StoreService } from './shared/services/store.service';
     ApiService,
     QueryBuilderService,
     StoreService,
+    UtilService,
     // PoiEffects,
     // SearchAction
   ],

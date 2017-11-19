@@ -16,6 +16,10 @@
       <p>
         Price level: {{result.price_level}}
       </p>
+      <button
+        class="btn btn-default"
+        (click)="fetchDetails(result.place_id)"
+      >More Details</button>
     </ng-template>
   </ngb-panel>
 </ngb-accordion>

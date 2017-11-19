@@ -31,10 +31,30 @@ export class ApiService {
   getPlaces(query: Query, searchType: string = 'textsearch'): Observable<any> {
     const baseUrl = `${environment.url}/${searchType}/json`;
     const url = baseUrl + this.queryBuilder.createUrl(query);
-    const headers = this.setHeaders();
 
     return this.http.get(`${url}&key=${environment.PLACES_API_KEY}`)
             .catch(this.handleErrors)
             .map((res: Response) => res);
+  }
+
+  getDetails(id: string): Observable<any> {
+    const url = `${environment.detailsUrl}placeid=${id}&key=${environment.PLACES_API_KEY}`;
+
+    return this.http.get(url)
+      .catch(this.handleErrors)
+      .map((res: Response) => res);
+  }
+
+  getPhotos(photoIds: string[], maxwidth: number): Observable<any> {
+    return Observable.forkJoin(
+      photoIds.map(photoId => {
+        let url = `${environment.photosUrl}photoreference=${photoId}&maxwidth=${maxwidth}&key=${environment.PLACES_API_KEY}`;
+        return this.http.get(url)
+          .catch(this.handleErrors)
+          .map((res: Response) => {
+              console.log('res of the photo observable: ', res);
+          });
+      })
+    )
   }
 }
