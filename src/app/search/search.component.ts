@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // import { State } from '../shared/models/state.model';
 // import { SearchAction } from '../shared/actions/index.actions';
 import { ApiService } from '../shared/services/api.service';
+import { StoreService } from '../shared/services/store.service';
 
 
 @Component({
@@ -12,7 +13,10 @@ import { ApiService } from '../shared/services/api.service';
 })
 export class SearchComponent implements OnInit {
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private storeService: StoreService,
+  ) { }
 
   ngOnInit() {
     this.getPlaces();
@@ -22,6 +26,7 @@ export class SearchComponent implements OnInit {
     this.apiService.getPlaces({queryText: '369+lexington'}, 'textsearch')
       .subscribe(data => {
         console.log('inside the getPlaces method, looking at data: ', data);
+        // TODO: check if valid results came back, store into results;
       })
     // this.store.dispatch(new SearchAction('365+lexington'));
     // this.store.dispatch({

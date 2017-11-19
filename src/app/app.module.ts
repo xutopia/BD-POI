@@ -36,8 +36,8 @@ import { StoreService } from './shared/services/store.service';
     AppRoutingModule,
     HttpClientModule,
     SearchModule,
-    ResultsModule,
     SharedModule,
+    ResultsModule,
     AgmCoreModule.forRoot({
       apiKey: environment.PLACES_API_KEY
     }),

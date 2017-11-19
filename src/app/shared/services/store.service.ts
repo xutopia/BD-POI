@@ -5,6 +5,7 @@ import { Query } from '../models/query.model';
 export class StoreService {
   searchHistory: Array<any> = [];
   results: Array<any> = [];
+  nextToken: string = '';
   details: any = {};
   errors: any = {};
   photos: Array<string> = [];
