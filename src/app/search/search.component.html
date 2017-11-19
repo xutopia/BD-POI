@@ -1,5 +1,43 @@
 <app-header></app-header>
-<p>
-  search works!
-</p>
+
+
+<div class="query-text-container">
+  <form>
+    <input
+      type="text"
+      class="txt"
+      name="queryText"
+      placeholder="Search"
+      [(ngModel)]="queryText"
+    />
+    <input
+      type="submit"
+      class="btn"
+      value="Search"
+      (click)="getPlaces()"
+    />
+  </form>
+</div>
+
+<div ngbDropdown class="d-inline-block category-container">
+  <button
+    class="btn btn-outline-primary"
+    id="dropdownBasic1"
+    ngbDropdownToggle
+  >
+    {{categorySelected}}
+  </button>
+  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+    <button
+      *ngFor="let category of categories"
+      class="dropdown-item"
+      (click)="setSelectedCategory(category)"
+    >
+      {{category}}
+    </button>
+  </div>
+</div>
+
+
+
 <app-footer></app-footer>
