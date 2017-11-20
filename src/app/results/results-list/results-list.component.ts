@@ -15,7 +15,6 @@ export class ResultsListComponent implements OnInit {
   results: Array<any>;
   pagResults: Array<any>;
   currentPagResults: Array<any>;
-  // filteredPagResults: Array<any>;
   name: string = 'Establishment Name';
   formatted_address: string = 'Address Unavailable';
   formatted_phone_number: string = 'Phone Number Unavailable';
@@ -23,6 +22,7 @@ export class ResultsListComponent implements OnInit {
   website: string = 'No Website Address Listed';
   page: number = 1;
   filters: Array<Filter> = [];
+  trigger: boolean = true;
   @ViewChild('detailsContent') private detailsContent;
   @ViewChild('noDetails') private noDetails;
 
@@ -43,15 +43,6 @@ export class ResultsListComponent implements OnInit {
     this.currentPagResults = this.pagResults[0];
     this.updateFilters();
   }
-
-  // updateCurrentPagResults(name: string): void {
-  //   // console.log('clicekd teh fucking checkbox: ', this.filters);
-  //   this.filters[name] = !this.filters[name];
-  //   if (this.filters[name])
-  //   this.filteredPagResults = this.currentPagResults.filter(result => {
-  //     return this.filters[result.types[0]];
-  //   });
-  // }
 
   loadPage(page: number) {
     this.currentPagResults = this.pagResults[page - 1];
@@ -86,18 +77,16 @@ export class ResultsListComponent implements OnInit {
         isSelected: false,
       }
     });
-    console.log('this.filters: ', this.filters);
   }
 
-  // objectkeys(obj): Array<string> {
-  //   return Object.keys(obj);
-  // }
+  activateTrigger(): void {
+    this.trigger = !this.trigger;
+  }
 
   fetchDetails(id: string): void {
     this.storeService.clearDetails();
     this.apiService.getDetails(id)
       .subscribe(details => {
-        console.log('inside the fetchDetails, looking at details: ', details);
         if (details.status === 'OK') {
           this.storeService.storeDetails(details.result);
           this.name = details.result.name;

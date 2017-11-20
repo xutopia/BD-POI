@@ -7,6 +7,7 @@
     <input
       type="checkbox"
       ngbButton
+      (click)="activateTrigger()"
       [(ngModel)]="filter.isSelected"
     >
     {{filter.name}}
@@ -16,7 +17,7 @@
 
 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
   <ngb-panel
-    *ngFor="let result of currentPagResults | filterResults: filters"
+    *ngFor="let result of currentPagResults | filterResults: trigger:filters"
     title="{{result.name}}"
   >
     <ng-template ngbPanelContent>
