@@ -1,3 +1,7 @@
+<div *ngIf="results.length === 0">
+  No content to display.
+</div>
+
 <div class="btn-group" data-toggle="buttons">
   <label
     *ngFor="let filter of filters"

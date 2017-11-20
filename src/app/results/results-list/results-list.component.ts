@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { StoreService } from '../../shared/services/store.service';
@@ -12,7 +12,7 @@ import { Filter } from '../../shared/models/filter.model';
   styleUrls: ['./results-list.component.css']
 })
 export class ResultsListComponent implements OnInit {
-  results: Array<any>;
+  @Input() results: Array<any> = [];
   pagResults: Array<any>;
   currentPagResults: Array<any>;
   name: string = 'Establishment Name';
@@ -36,6 +36,7 @@ export class ResultsListComponent implements OnInit {
 
   ngOnInit() {
     this.results = this.storeService.fetchResults();
+    console.log('this.results of results-list: ', Array.isArray(this.results));
     if (this.results.length > 10) {
       this.pagResults = this.utilService.paginateResults(this.results);
     } else {
