@@ -16,14 +16,6 @@ export class ApiService {
     private queryBuilder: QueryBuilderService,
   ) {}
 
-  private setHeaders(): HttpHeaders {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    };
-    return new HttpHeaders(headers);
-  }
-
   private handleErrors(error: any) {
     return Observable.throw(error);
   }
@@ -45,16 +37,11 @@ export class ApiService {
       .map((res: Response) => res);
   }
 
-  getPhotos(photoIds: string[], maxwidth: number): Observable<any> {
-    return Observable.forkJoin(
-      photoIds.map(photoId => {
-        let url = `${environment.photosUrl}photoreference=${photoId}&maxwidth=${maxwidth}&key=${environment.PLACES_API_KEY}`;
-        return this.http.get(url)
-          .catch(this.handleErrors)
-          .map((res: Response) => {
-              console.log('res of the photo observable: ', res);
-          });
-      })
-    )
+  getNextResults(token: string): Observable<any> {
+    const url = `${environment.url}/textsearch/json?pagetoken=${token}&key=${environment.PLACES_API_KEY}`;
+
+    return this.http.get(url)
+            .catch(this.handleErrors)
+            .map((res: Response) => res);
   }
 }

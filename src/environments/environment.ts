@@ -8,5 +8,4 @@ export const environment = {
   PLACES_API_KEY: "Key",
   url: 'https://maps.googleapis.com/maps/api/place',
   detailsUrl: `https://maps.googleapis.com/maps/api/place/details/json?`,
-  photosUrl: `https://maps.googleapis.com/maps/api/place/photo?`
 };

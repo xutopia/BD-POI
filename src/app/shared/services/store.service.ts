@@ -36,6 +36,10 @@ export class StoreService {
     this.nextToken = token;
   }
 
+  getNextToken(): string {
+    return this.nextToken;
+  }
+
   storeDetails(data: any): void {
     this.details = data;
   }

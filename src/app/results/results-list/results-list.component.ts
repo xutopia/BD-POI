@@ -41,6 +41,20 @@ export class ResultsListComponent implements OnInit {
 
   loadPage(page: number) {
     this.currentPagResults = this.pagResults[page - 1];
+    if (this.results.length - (page * 10) >= 0 && this.results.length - (page * 10) < 10) {
+      if (this.storeService.getNextToken()) {
+        let nextToken = this.storeService.getNextToken();
+        this.apiService.getNextResults(nextToken)
+          .subscribe(data => {
+            if (data.results.length) {
+              this.storeService.addToResults(data.results);
+              this.storeService.storeNextToken(data.next_page_token);
+              this.results = this.storeService.fetchResults();
+              this.pagResults = this.utilService.paginateResults(this.results);
+            }
+          });
+      }
+    }
   }
 
   fetchDetails(id: string): void {
