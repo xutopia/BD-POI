@@ -1,6 +1,22 @@
+<div class="btn-group" data-toggle="buttons">
+  <label
+    *ngFor="let filter of filters"
+    class="btn-primary"
+    ngbButtonLabel
+  >
+    <input
+      type="checkbox"
+      ngbButton
+      [(ngModel)]="filter.isSelected"
+    >
+    {{filter.name}}
+  </label>
+</div>
+
+
 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
   <ngb-panel
-    *ngFor="let result of currentPagResults"
+    *ngFor="let result of currentPagResults | filterResults: filters"
     title="{{result.name}}"
   >
     <ng-template ngbPanelContent>
