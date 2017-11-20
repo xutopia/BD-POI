@@ -10,12 +10,15 @@ import { UtilService } from '../../shared/services/util.service';
   styleUrls: ['./results-list.component.css']
 })
 export class ResultsListComponent implements OnInit {
-  results: any;
+  results: Array<any>;
+  pagResults: Array<any>;
+  currentPagResults: Array<any>;
   name: string = 'Establishment Name';
   formatted_address: string = 'Address Unavailable';
   formatted_phone_number: string = 'Phone Number Unavailable';
   business_hours: Array<string> = ['No Business Hours to Show'];
   website: string = 'No Website Address Listed';
+  page: number = 1;
   @ViewChild('detailsContent') private detailsContent;
   @ViewChild('noDetails') private noDetails;
 
@@ -28,7 +31,16 @@ export class ResultsListComponent implements OnInit {
 
   ngOnInit() {
     this.results = this.storeService.fetchResults();
-    console.log('this.results: ', this.results);
+    if (this.results.length > 10) {
+      this.pagResults = this.utilService.paginateResults(this.results);
+    } else {
+      this.pagResults = this.results;
+    }
+    this.currentPagResults = this.pagResults[0];
+  }
+
+  loadPage(page: number) {
+    this.currentPagResults = this.pagResults[page - 1];
   }
 
   fetchDetails(id: string): void {

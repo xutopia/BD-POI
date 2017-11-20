@@ -1,6 +1,6 @@
 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
   <ngb-panel
-    *ngFor="let result of results"
+    *ngFor="let result of currentPagResults"
     title="{{result.name}}"
   >
     <ng-template ngbPanelContent>
@@ -23,6 +23,8 @@
     </ng-template>
   </ngb-panel>
 </ngb-accordion>
+
+<ngb-pagination collectionSize="{{results.length}}" [(page)]="page" aria-label="Default pagination" (pageChange)="loadPage(page)"></ngb-pagination>
 
 <ng-template #detailsContent let-c="close" let-d="dismiss">
   <div class="modal-header">

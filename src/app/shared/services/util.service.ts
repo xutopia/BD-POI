@@ -4,9 +4,17 @@ import { Injectable } from '@angular/core';
 export class UtilService {
   constructor() {}
 
-  extractPhotoIds(photos: Array<any>): Array<string> {
-    return photos.map(photo => {
-      return photo.photo_reference;
-    });
+  paginateResults(results: Array<any>): Array<any> {
+    let pagResults: Array<any> = [];
+    let i: number;
+    for (i = 0; i < results.length; i += 10) {
+      pagResults.push(results.slice(i, i + 10));
+    }
+
+    if (results.length % (pagResults.length * 10)) {
+      pagResults.push(results.slice(pagResults.length * 10));
+    }
+
+    return pagResults;
   }
 }
