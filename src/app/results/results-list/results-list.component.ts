@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { StoreService } from '../../shared/services/store.service';
@@ -25,6 +25,7 @@ export class ResultsListComponent implements OnInit {
   trigger: boolean = true;
   @ViewChild('detailsContent') private detailsContent;
   @ViewChild('noDetails') private noDetails;
+  @Output() markerUpdate = new EventEmitter();
 
   constructor(
     private storeService: StoreService,
@@ -42,11 +43,15 @@ export class ResultsListComponent implements OnInit {
     }
     this.currentPagResults = this.pagResults[0];
     this.updateFilters();
+    this.addMarkers(this.currentPagResults);
   }
 
   loadPage(page: number) {
     this.currentPagResults = this.pagResults[page - 1];
     this.updateFilters();
+    this.addMarkers(this.currentPagResults);
+    this.markerUpdate.emit(null)
+
     if (this.results.length - (page * 10) >= 0 && this.results.length - (page * 10) < 10) {
       if (this.storeService.getNextToken()) {
         let nextToken = this.storeService.getNextToken();
@@ -77,6 +82,11 @@ export class ResultsListComponent implements OnInit {
         isSelected: false,
       }
     });
+  }
+
+  addMarkers(currentResults): void {
+    let markers = this.utilService.extractMarkers(currentResults);
+    this.storeService.addMarkers(markers);
   }
 
   activateTrigger(): void {

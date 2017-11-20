@@ -56,6 +56,11 @@ export class StoreService {
     this.details = {};
   }
 
-  addMarkers(): void {
+  addMarkers(markers: Array<Marker>): void {
+    this.markers = markers;
+  }
+
+  getMarkers(): Array<Marker> {
+    return this.markers;
   }
 }

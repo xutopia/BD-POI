@@ -2,12 +2,19 @@
 
 <div class="results-container">
   <div class="results-list-container">
-    <app-results-list></app-results-list>
+    <app-results-list
+      (markerUpdate)="updateMarkers()"
+    ></app-results-list>
   </div>
 
   <div class="results-map-container">
     <agm-map [latitude]="lat" [longitude]="lng">
-      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      <agm-marker
+        *ngFor="let marker of markers"
+        latitude="{{marker.latitude}}"
+        longitude="{{marker.longitude}}"
+      >
+      </agm-marker>
     </agm-map>
   </div>
 

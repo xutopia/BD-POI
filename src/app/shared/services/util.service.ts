@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { Marker } from '../models/marker.model';
+
 @Injectable()
 export class UtilService {
   constructor() {}
@@ -16,5 +18,14 @@ export class UtilService {
     }
 
     return pagResults;
+  }
+
+  extractMarkers(currentResults: Array<any>): Array<Marker> {
+    return currentResults.map(result => {
+      return {
+        latitude: result.geometry.location.lat,
+        longitude: result.geometry.location.lng,
+      }
+    });
   }
 }
