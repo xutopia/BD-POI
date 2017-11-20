@@ -1,52 +1,57 @@
 <app-header></app-header>
 
-
-<div class="query-text-container">
-  <form>
-    <input
+<div class="search-container">
+  <div class="query-text-container input-group input-group-lg">
+      <input
       type="text"
-      class="txt"
+      class="form-control"
       name="queryText"
       placeholder="Search"
       [(ngModel)]="queryText"
-    />
-  </form>
-</div>
+      />
+  </div>
 
-<div ngbDropdown class="d-inline-block category-container">
-  <button
-    class="btn btn-outline-primary"
-    id="dropdownBasic1"
-    ngbDropdownToggle
-  >
-    {{categorySelected}}
-  </button>
-  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+  <div class="filter-container">
+    <div ngbDropdown class="d-inline-block category-container">
+      <button
+        class="btn btn-outline-primary"
+        id="dropdownBasic1"
+        ngbDropdownToggle
+      >
+        {{categorySelected}}
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button
+          *ngFor="let category of categories"
+          class="dropdown-item"
+          (click)="setSelectedCategory(category)"
+        >
+          {{category}}
+        </button>
+      </div>
+    </div>
+
+    <div class="max-price-container">
+      <span>Max Price Range</span>
+      <input type="range" min="0" max="4" [(ngModel)]="maxPrice" />
+      {{maxPrice}}
+    </div>
+  </div>
+
+  <div class="buttons-container">
     <button
-      *ngFor="let category of categories"
-      class="dropdown-item"
-      (click)="setSelectedCategory(category)"
+      class="btn btn-primary"
+      (click)="getPlaces()"
     >
-      {{category}}
+      SEARCH
+    </button>
+    <button
+      class="btn btn-danger"
+      (click)="resetSearch()"
+    >
+      RESET SEARCH
     </button>
   </div>
-</div>
-
-<div class="max-price-container">
-  <span>Max Price Range</span>
-  <input type="range" min="0" max="4" [(ngModel)]="maxPrice" />
-  {{maxPrice}}
-</div>
-
-<div class="buttons-container">
-  <button
-    class="btn btn-primary"
-    (click)="getPlaces()"
-  >SEARCH</button>
-  <button
-    class="btn btn-danger"
-    (click)="resetSearch()"
-  >RESET SEARCH</button>
 
 </div>
 

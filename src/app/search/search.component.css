@@ -1,0 +1,34 @@
+.search-container {
+  height: 100%;
+}
+
+
+.query-text-container {
+  display: flex;
+  flex-grow: 8;
+  justify-content: center;
+  align-items: center;
+  padding: 6em;
+}
+
+.filter-container {
+  display: flex;
+  flex-grow: 8;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.category-container {
+  margin: 8em;
+}
+
+.max-price-container {
+  margin: 8em;
+}
+
+.buttons-container {
+  display: flex;
+  flex-grow: 8;
+  justify-content: space-around;
+  align-items: center;
+}
