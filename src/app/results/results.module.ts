@@ -9,7 +9,6 @@ import { environment } from '../../environments/environment';
 import { SharedModule } from '../shared/shared.module';
 import { ResultsComponent } from './results/results.component';
 import { ResultsListComponent } from './results-list/results-list.component';
-import { ResultsDetailsComponent } from './results-details/results-details.component';
 import { FilterPipe } from '../shared/pipes/filter.pipe';
 
 
@@ -34,7 +33,6 @@ const ResultsRouting: ModuleWithProviders = RouterModule.forChild([
   declarations: [
     ResultsComponent,
     ResultsListComponent,
-    ResultsDetailsComponent,
     FilterPipe,
   ]
 })

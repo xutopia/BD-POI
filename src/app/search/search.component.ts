@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import { Store } from "@ngrx/store";
-// import { State } from '../shared/models/state.model';
-// import { SearchAction } from '../shared/actions/index.actions';
+
 import { Query } from '../shared/models/query.model';
 import { ApiService } from '../shared/services/api.service';
 import { StoreService } from '../shared/services/store.service';

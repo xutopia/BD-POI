@@ -36,7 +36,6 @@ export class ResultsListComponent implements OnInit {
 
   ngOnInit() {
     this.results = this.storeService.fetchResults();
-    console.log('this.results of results-list: ', Array.isArray(this.results));
     if (this.results.length > 10) {
       this.pagResults = this.utilService.paginateResults(this.results);
     } else {
