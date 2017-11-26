@@ -1,0 +1,18 @@
+.map-container {
+  opacity: .4;
+}
+
+agm-map {
+  height: 100vh;
+}
+
+.begin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
+}
+
+.btn-primary {
+  font-size: 180%;
+}

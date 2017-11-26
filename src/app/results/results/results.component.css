@@ -1,0 +1,17 @@
+.results-container {
+  display: flex;
+}
+
+.results-list-container {
+  flex-shrink: 4;
+  display: flex;
+  align-items: baseline;
+}
+
+.results-map-container {
+  flex-grow: 10;
+}
+
+agm-map {
+  height: 100vh;
+}

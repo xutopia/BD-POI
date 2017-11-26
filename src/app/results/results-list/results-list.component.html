@@ -1,0 +1,100 @@
+<div *ngIf="results.length === 0">
+  No content to display.
+</div>
+
+<div class="btn-group" data-toggle="buttons">
+  <label
+    *ngFor="let filter of filters"
+    class="btn-primary"
+    ngbButtonLabel
+  >
+    <input
+      type="checkbox"
+      ngbButton
+      (click)="activateTrigger()"
+      [(ngModel)]="filter.isSelected"
+    >
+    {{filter.name}}
+  </label>
+</div>
+
+
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ngb-panel
+    *ngFor="let result of currentPagResults | filterResults: trigger:filters"
+    title="{{result.name}}"
+  >
+    <ng-template ngbPanelContent>
+      <ngb-rating rate="{{result.rating}}" [readonly]="true" max="5"></ngb-rating>
+      <br />
+      <span>
+        {{result.types[0]}}
+      </span>
+      &middot;
+      <span>
+        {{result.formatted_address}}
+      </span>
+      <p>
+        Price level: {{result.price_level}}
+      </p>
+      <button
+        class="btn btn-default"
+        (click)="fetchDetails(result.place_id)"
+      >More Details</button>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+<ngb-pagination collectionSize="{{results.length}}" [(page)]="page" aria-label="Default pagination" (pageChange)="loadPage(page)"></ngb-pagination>
+
+<ng-template #detailsContent let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      Name: {{name}}
+    </p>
+    <p>
+      Address: {{formatted_address}}
+    </p>
+    <p>
+      Phone Number: {{formatted_phone_number}}
+    </p>
+    <p></p>
+      Business Hours:
+      <ul>
+        <li
+          *ngFor="let businessHour of business_hours"
+        >
+          {{businessHour}}
+        </li>
+      </ul>
+    <p>
+      Website: <a href="{{website}}" target="_blank">{{website}}</a>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #noDetails let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      There are no details to show. Please try again later.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>

@@ -1,0 +1,24 @@
+<app-header></app-header>
+
+
+<div class="results-container">
+  <div class="results-list-container">
+    <app-results-list
+      (markerUpdate)="updateMarkers()"
+    ></app-results-list>
+  </div>
+
+  <div class="results-map-container">
+    <agm-map [latitude]="lat" [longitude]="lng">
+      <agm-marker
+        *ngFor="let marker of markers"
+        latitude="{{marker.latitude}}"
+        longitude="{{marker.longitude}}"
+      >
+      </agm-marker>
+    </agm-map>
+  </div>
+
+</div>
+
+<app-footer></app-footer>
