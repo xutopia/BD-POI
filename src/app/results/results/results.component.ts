@@ -10,8 +10,9 @@ import { Marker } from '../../shared/models/marker.model';
 })
 export class ResultsComponent implements OnInit {
   markers: Array<Marker>;
-  lat: number = 41.0157;
-  lng: number = -74.20911;
+  lat: number;
+  lng: number;
+  zoom: number = 10;
 
   constructor(
     private storeService: StoreService,
@@ -20,7 +21,9 @@ export class ResultsComponent implements OnInit {
   ngOnInit() {
   }
 
-  updateMarkers(): void {
+  markerUpdate(event): void {
     this.markers = this.storeService.getMarkers();
+    this.lat = this.markers[0].latitude;
+    this.lng = this.markers[0].longitude;
   }
 }

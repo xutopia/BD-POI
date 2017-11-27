@@ -1,7 +1,7 @@
 export class Query {
   queryText: string;
   type?: string;
-  minprice?: number;
-  maxprice?: number;
+  locationText?: string;
+  radius?: number;
   opennow?: boolean;
 }

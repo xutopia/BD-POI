@@ -19,7 +19,9 @@
 </div>
 
 
-<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+<ngb-accordion #acc="ngbAccordion"
+  [closeOthers]="true"
+>
   <ngb-panel
     *ngFor="let result of currentPagResults | filterResults: trigger:filters"
     title="{{result.name}}"

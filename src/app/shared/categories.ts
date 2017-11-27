@@ -1,4 +1,5 @@
 export const CATEGORIES: string[] = [
+  'select category',
   'accounting',
   'airport',
   'amusement_park',

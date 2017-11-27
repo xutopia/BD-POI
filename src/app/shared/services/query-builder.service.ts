@@ -5,7 +5,7 @@ import { Query } from '../models/query.model';
 @Injectable()
 export class QueryBuilderService {
   createUrl(query: Query): string {
-    let url: string = `?query=${query.queryText}&type=${query.type || ''}&maxprice=${query.maxprice}`;
+    let url: string = `?query=${query.queryText}&type=${query.type || ''}&radius=${query.radius}`;
 
     if (query.opennow) {
       url = `${url}&opennow`;

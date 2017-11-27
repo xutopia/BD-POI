@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { Query } from '../shared/models/query.model';
 import { ApiService } from '../shared/services/api.service';
@@ -15,11 +15,15 @@ import { CATEGORIES } from '../shared/categories';
 })
 export class SearchComponent implements OnInit {
   queryText: string = '';
+  locationText: string = '';
+  openNow: boolean = false;
   categorySelected: string = 'select category';
   categories = CATEGORIES;
-  maxPrice: number = 4;
-  closeResult: string;
-  @ViewChild('content') private content;
+  radius: number = 500;
+  status: string= '';
+  advSearchRef: NgbModalRef;
+  @ViewChild('errContent') private errContent;
+  @ViewChild('advSearch') private advSearch;
 
   constructor(
     private apiService: ApiService,
@@ -32,10 +36,14 @@ export class SearchComponent implements OnInit {
   }
 
   getPlaces(): void {
-    let query: Query = this.constructQuery(this.queryText, this.categorySelected, this.maxPrice);
+    let query: Query = this.constructQuery(this.queryText, this.locationText, this.radius, this.categorySelected, this.openNow);
 
     this.apiService.getPlaces(query, 'textsearch')
       .subscribe(data => {
+        if (this.advSearchRef) {
+          this.advSearchRef.close();
+        }
+
         if (data.results.length) {
           this.storeService.addToSearchHistory(query);
           this.storeService.clearResults();
@@ -43,17 +51,19 @@ export class SearchComponent implements OnInit {
           this.storeService.storeNextToken(data.next_page_token);
           this.router.navigateByUrl('/results');
         } else {
-          this.openModal(this.content);
+          this.status = data.status;
+          this.openModal(this.errContent);
         }
       });
   }
 
-  constructQuery(queryText: string, type: string, maxprice: number): Query {
-
+  constructQuery(queryText: string, locationText: string, radius: number, type: string, opennow: boolean): Query {
     return {
       queryText,
       type: type === 'select category' ? '' : type,
-      maxprice,
+      locationText,
+      radius,
+      opennow,
     }
   }
 
@@ -63,11 +73,12 @@ export class SearchComponent implements OnInit {
 
   resetSearch(): void {
     this.queryText = '';
+    this.locationText = '';
     this.categorySelected = 'select category';
-    this.maxPrice = 4;
+    this.openNow = false;
   }
 
-  openModal(content) {
-    this.modalService.open(content).result;
+  openModal(modal) {
+    this.advSearchRef = this.modalService.open(modal);
   }
 }
