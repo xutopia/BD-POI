@@ -4,7 +4,8 @@
 <div class="results-container">
   <div class="results-list-container">
     <app-results-list
-      (markerUpdate)="updateMarkers()"
+      (markerUpdateNeeded)="updateMarkers()"
+      (update)="markerUpdate($event)"
     ></app-results-list>
   </div>
 
@@ -12,13 +13,11 @@
     <agm-map [latitude]="lat" [longitude]="lng">
       <agm-marker
         *ngFor="let marker of markers"
-        latitude="{{marker.latitude}}"
-        longitude="{{marker.longitude}}"
+        [latitude]="marker.latitude"
+        [longitude]="marker.longitude"
       >
       </agm-marker>
     </agm-map>
   </div>
 
 </div>
-
-<app-footer></app-footer>

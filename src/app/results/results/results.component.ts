@@ -9,18 +9,26 @@ import { Marker } from '../../shared/models/marker.model';
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent implements OnInit {
-  markers: Array<Marker>;
-  lat: number = 41.0157;
-  lng: number = -74.20911;
+  markers: Array<Marker> = [
+    {
+      latitude: 0,
+      longitude: 0
+    }
+  ];
+  lat: number = this.markers[0].latitude;
+  lng: number = this.markers[0].longitude;
 
   constructor(
     private storeService: StoreService,
   ) { }
 
   ngOnInit() {
+    // this.markers = this.storeService.getMarkers();
+    // console.log('when do I see this markers: ', this.markers);
   }
 
-  updateMarkers(): void {
+  markerUpdate(event): void {
     this.markers = this.storeService.getMarkers();
+    console.log('this.markers: ', this.markers);
   }
 }

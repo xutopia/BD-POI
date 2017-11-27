@@ -40,7 +40,10 @@ export class SearchComponent implements OnInit {
 
     this.apiService.getPlaces(query, 'textsearch')
       .subscribe(data => {
-        this.advSearchRef.close();
+        if (this.advSearchRef) {
+          this.advSearchRef.close();
+        }
+        
         if (data.results.length) {
           this.storeService.addToSearchHistory(query);
           this.storeService.clearResults();

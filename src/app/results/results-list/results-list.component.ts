@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 import { StoreService } from '../../shared/services/store.service';
 import { ApiService } from '../../shared/services/api.service';
@@ -25,7 +25,7 @@ export class ResultsListComponent implements OnInit {
   trigger: boolean = true;
   @ViewChild('detailsContent') private detailsContent;
   @ViewChild('noDetails') private noDetails;
-  @Output() markerUpdate = new EventEmitter();
+  @Output('update') markerUpdate: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private storeService: StoreService,
@@ -44,13 +44,15 @@ export class ResultsListComponent implements OnInit {
     this.currentPagResults = this.pagResults[0];
     this.updateFilters();
     this.addMarkers(this.currentPagResults);
+    // console.log('looking at ngOnInit of results-list, this.pagResults: ', this.storeService.getMarkers());
+    this.markerUpdate.emit(null);
   }
 
   loadPage(page: number) {
     this.currentPagResults = this.pagResults[page - 1];
     this.updateFilters();
     this.addMarkers(this.currentPagResults);
-    this.markerUpdate.emit(null)
+    this.markerUpdate.emit(null);
 
     if (this.results.length - (page * 10) >= 0 && this.results.length - (page * 10) < 10) {
       if (this.storeService.getNextToken()) {
@@ -109,6 +111,10 @@ export class ResultsListComponent implements OnInit {
           this.modalService.open(this.noDetails);
         }
       });
+  }
+
+  beforeChange($event: NgbPanelChangeEvent): void {
+    console.log('pin dropped', $event);
   }
 
 }

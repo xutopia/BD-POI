@@ -28,7 +28,6 @@ export class ApiService {
 
     if (query.locationText) {
       const geocodeUrl = `${environment.geocodeUrl}address=${query.locationText}&key=${environment.PLACES_API_KEY}`
-
       return this.http.get(geocodeUrl).flatMap((data: any) => {
         const urlWithLocation = `${url}&location=${data.results[0].geometry.location.lat},${data.results[0].geometry.location.lng}`;
 
