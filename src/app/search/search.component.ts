@@ -20,7 +20,7 @@ export class SearchComponent implements OnInit {
   categorySelected: string = 'select category';
   categories = CATEGORIES;
   radius: number = 500;
-  closeResult: string;
+  status: string= '';
   advSearchRef: NgbModalRef;
   @ViewChild('errContent') private errContent;
   @ViewChild('advSearch') private advSearch;
@@ -43,7 +43,7 @@ export class SearchComponent implements OnInit {
         if (this.advSearchRef) {
           this.advSearchRef.close();
         }
-        
+
         if (data.results.length) {
           this.storeService.addToSearchHistory(query);
           this.storeService.clearResults();
@@ -51,13 +51,13 @@ export class SearchComponent implements OnInit {
           this.storeService.storeNextToken(data.next_page_token);
           this.router.navigateByUrl('/results');
         } else {
+          this.status = data.status;
           this.openModal(this.errContent);
         }
       });
   }
 
   constructQuery(queryText: string, locationText: string, radius: number, type: string, opennow: boolean): Query {
-
     return {
       queryText,
       type: type === 'select category' ? '' : type,
@@ -73,6 +73,7 @@ export class SearchComponent implements OnInit {
 
   resetSearch(): void {
     this.queryText = '';
+    this.locationText = '';
     this.categorySelected = 'select category';
     this.openNow = false;
   }

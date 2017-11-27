@@ -3,25 +3,21 @@
 <div class="search-container">
   <div class="query-container input-group input-group-lg">
       <input
-      type="text"
-      class="form-control"
-      name="queryText"
-      placeholder="Search"
-      [(ngModel)]="queryText"
+        type="text"
+        class="form-control"
+        name="queryText"
+        placeholder="Search"
+        [(ngModel)]="queryText"
       />
       <button
-      class="btn btn-link"
-      type="button"
-      role="button"
-      (click)="openModal(this.advSearch)"
+        class="btn btn-link"
+        type="button"
+        role="button"
+        (click)="openModal(this.advSearch)"
       >
-      Advanced Search Options
-    </button>
+        Advanced Search Options
+      </button>
   </div>
-
-  <div>
-  </div>
-
 
 
   <div class="buttons-container">
@@ -110,7 +106,16 @@
     </button>
   </div>
   <div class="modal-body">
-    <p>It appears your search resulted in an error. Please try your search again, or refine the search term and options.</p>
+    <p
+      *ngIf="status === 'ZERO_RESULTS'"
+    >
+      It appears your search for "{{queryText}}" did not yield any results. Please try to refine the search term and/or use the Advanced Search options.
+    </p>
+    <p
+      *ngIf="status !== 'ZERO_RESULTS'"
+    >
+      It appears your search resulted in an error. Please try your search again. If you continue to see this error, please contact the administrator and someone will assist you.
+    </p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
