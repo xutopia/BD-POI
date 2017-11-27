@@ -15,11 +15,14 @@ import { CATEGORIES } from '../shared/categories';
 })
 export class SearchComponent implements OnInit {
   queryText: string = '';
+  locationText: string = '';
+  openNow: boolean = false;
   categorySelected: string = 'select category';
   categories = CATEGORIES;
-  maxPrice: number = 4;
+  radius: number = 500;
   closeResult: string;
-  @ViewChild('content') private content;
+  @ViewChild('errContent') private errContent;
+  @ViewChild('advSearch') private advSearch;
 
   constructor(
     private apiService: ApiService,
@@ -32,7 +35,7 @@ export class SearchComponent implements OnInit {
   }
 
   getPlaces(): void {
-    let query: Query = this.constructQuery(this.queryText, this.categorySelected, this.maxPrice);
+    let query: Query = this.constructQuery(this.queryText, this.locationText, this.radius, this.categorySelected, this.openNow);
 
     this.apiService.getPlaces(query, 'textsearch')
       .subscribe(data => {
@@ -43,17 +46,19 @@ export class SearchComponent implements OnInit {
           this.storeService.storeNextToken(data.next_page_token);
           this.router.navigateByUrl('/results');
         } else {
-          this.openModal(this.content);
+          this.openModal(this.errContent);
         }
       });
   }
 
-  constructQuery(queryText: string, type: string, maxprice: number): Query {
+  constructQuery(queryText: string, locationText: string, radius: number, type: string, opennow: boolean): Query {
 
     return {
       queryText,
       type: type === 'select category' ? '' : type,
-      maxprice,
+      locationText,
+      radius,
+      opennow,
     }
   }
 
@@ -64,10 +69,10 @@ export class SearchComponent implements OnInit {
   resetSearch(): void {
     this.queryText = '';
     this.categorySelected = 'select category';
-    this.maxPrice = 4;
+    this.openNow = false;
   }
 
-  openModal(content) {
-    this.modalService.open(content).result;
+  openModal(modal) {
+    this.modalService.open(modal).result;
   }
 }
