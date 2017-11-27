@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { Query } from '../shared/models/query.model';
 import { ApiService } from '../shared/services/api.service';
@@ -21,6 +21,7 @@ export class SearchComponent implements OnInit {
   categories = CATEGORIES;
   radius: number = 500;
   closeResult: string;
+  advSearchRef: NgbModalRef;
   @ViewChild('errContent') private errContent;
   @ViewChild('advSearch') private advSearch;
 
@@ -39,6 +40,7 @@ export class SearchComponent implements OnInit {
 
     this.apiService.getPlaces(query, 'textsearch')
       .subscribe(data => {
+        this.advSearchRef.close();
         if (data.results.length) {
           this.storeService.addToSearchHistory(query);
           this.storeService.clearResults();
@@ -73,6 +75,6 @@ export class SearchComponent implements OnInit {
   }
 
   openModal(modal) {
-    this.modalService.open(modal).result;
+    this.advSearchRef = this.modalService.open(modal);
   }
 }

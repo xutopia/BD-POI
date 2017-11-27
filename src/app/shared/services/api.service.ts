@@ -36,11 +36,11 @@ export class ApiService {
                 .catch(this.handleErrors)
                 .map((res: Response) => res);
       });
+    } else {
+      return this.http.get(`${url}&key=${environment.PLACES_API_KEY}`)
+      .catch(this.handleErrors)
+      .map((res: Response) => res);
     }
-
-    return this.http.get(`${url}&key=${environment.PLACES_API_KEY}`)
-            .catch(this.handleErrors)
-            .map((res: Response) => res);
   }
 
   getDetails(id: string): Observable<any> {
