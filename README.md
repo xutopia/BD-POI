@@ -4,13 +4,19 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ** Please make sure CORS are enabled before attempting to run the app **
 
+## Getting Started
+Assuming you have Node and NPM installed locally:
+
+```
+$ npm i
+$ npm run build
+$ npm start
+```
+Once the server is up and running, feel free to visit `http://localhost:4200/` on your favorite browser to see the app.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
