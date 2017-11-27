@@ -23,6 +23,7 @@ export class UtilService {
   extractMarkers(currentResults: Array<any>): Array<Marker> {
     return currentResults.map(result => {
       return {
+        name: result.name,
         latitude: result.geometry.location.lat,
         longitude: result.geometry.location.lng,
       }

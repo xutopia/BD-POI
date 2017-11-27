@@ -44,7 +44,6 @@ export class ResultsListComponent implements OnInit {
     this.currentPagResults = this.pagResults[0];
     this.updateFilters();
     this.addMarkers(this.currentPagResults);
-    // console.log('looking at ngOnInit of results-list, this.pagResults: ', this.storeService.getMarkers());
     this.markerUpdate.emit(null);
   }
 
@@ -112,9 +111,4 @@ export class ResultsListComponent implements OnInit {
         }
       });
   }
-
-  beforeChange($event: NgbPanelChangeEvent): void {
-    console.log('pin dropped', $event);
-  }
-
 }

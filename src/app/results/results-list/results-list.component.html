@@ -21,12 +21,10 @@
 
 <ngb-accordion #acc="ngbAccordion"
   [closeOthers]="true"
-  (panelChange)="beforeChange($event)"
 >
   <ngb-panel
     *ngFor="let result of currentPagResults | filterResults: trigger:filters"
     title="{{result.name}}"
-    (click)="dropPin()"
   >
     <ng-template ngbPanelContent>
       <ngb-rating rate="{{result.rating}}" [readonly]="true" max="5"></ngb-rating>

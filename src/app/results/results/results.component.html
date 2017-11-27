@@ -10,12 +10,16 @@
   </div>
 
   <div class="results-map-container">
-    <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-map #gm [latitude]="lat" [longitude]="lng" [zoom]="zoom">
       <agm-marker
-        *ngFor="let marker of markers"
+        *ngFor="let marker of markers; let idx = index"
         [latitude]="marker.latitude"
         [longitude]="marker.longitude"
+        (markerClick)="gm.lastOpen?.close(); gm.lastOpen = infoWindow"
       >
+        <agm-info-window #infoWindow>
+          {{marker.name}}
+        </agm-info-window>
       </agm-marker>
     </agm-map>
   </div>
